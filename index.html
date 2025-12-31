@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel de Fisioterapia</title>
+    <link rel="stylesheet" href="estilos.css">
+</head>
+<body>
+    <div class="background-overlay"></div>
+
+    <div class="dashboard-container">
+        <nav id="sidebar">
+            <div class="sidebar-header">
+                <h3>Clínica Fisioterapia</h3>
+            </div>
+            <ul class="nav-list">
+                <li><a href="#" class="nav-link active" data-target="pacientes">
+                    <svg><path d="M17 18a2 2 0 0 0-2-2H9a2 2 0 0 0-2 2"/> <path d="M12 14a4 4 0 1 0 0-8a4 4 0 0 0 0 8Z"/> <path d="M17 18a2 2 0 0 0 2-2v-2a2 2 0 0 0-2-2h-2"/> <path d="M7 16a2 2 0 0 0-2 2v2a2 2 0 0 0 2 2h2"/> <path d="M12 14a4 4 0 1 0 0-8a4 4 0 0 0 0 8Z"/> </svg>
+                    <span>Pacientes</span>
+                </a></li>
+                <li><a href="#" class="nav-link" data-target="agendamentos">
+                    <svg><rect width="18" height="18" x="3" y="4" rx="2" ry="2"/> <line x1="16" x2="16" y1="2" y2="6"/> <line x1="8" x2="8" y1="2" y2="6"/> <line x1="3" x2="21" y1="10" y2="10"/> <path d="M8 14h.01"/> <path d="M12 14h.01"/> <path d="M16 14h.01"/> <path d="M8 18h.01"/> <path d="M12 18h.01"/> <path d="M16 18h.01"/> </svg>
+                    <span>Agendamentos</span>
+                </a></li>
+                <li><a href="#" class="nav-link" data-target="profissionais">
+                    <svg><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/> <circle cx="9" cy="7" r="4"/> <path d="M22 21v-2a4 4 0 0 0-3-3.87"/> <path d="M16 3.13a4 4 0 0 1 0 7.75"/> </svg>
+                    <span>Profissionais</span>
+                </a></li>
+                 <li><a href="#" class="nav-link" data-target="fluxo-caixa">
+                    <svg><line x1="12" x2="12" y1="2" y2="22"/> <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/> </svg>
+                    <span>Fluxo de Caixa</span>
+                </a></li>
+            </ul>
+        </nav>
+
+        <main id="main-content">
+            <div id="pacientes-content" class="content-section active">
+                <h1>Gestão de Pacientes</h1>
+                <div class="bloco-funcao">
+                    <h3>Adicionar Novo Paciente</h3>
+                    <form id="formAdicionarPaciente">
+                        <input type="text" id="nomePaciente" placeholder="Nome Completo do Paciente" required>
+                        <button type="submit">Adicionar</button>
+                    </form>
+                </div>
+                <div class="search-container">
+                    <input type="text" id="caixaDePesquisa" onkeyup="filtrarLista()" placeholder="Pesquisar por paciente...">
+                </div>
+                <ul id="listaDeItens">
+                    </ul>
+            </div>
+
+            <div id="agendamentos-content" class="content-section">
+    <h1>Cadastro de Agendamentos</h1>
+    
+    <div class="bloco-funcao">
+        <form id="formAgendamento">
+            <div class="form-grid">
+                <div class="form-group">
+                    <label for="agendamentoPaciente">Paciente:</label>
+                    <select id="agendamentoPaciente" required></select>
+                </div>
+                <div class="form-group">
+                    <label for="agendamentoProfissional">Profissional:</label>
+                    <select id="agendamentoProfissional" required>
+                        <option value="Soraia Bonissoni">Soraia Bonissoni</option>
+                        <option value="Taísa Civa Sordi">Taísa Civa Sordi</option>
+                        <option value="Marilia da Luz da Silva">Marilia da Luz da Silva</option>
+                        <option value="Cristiano Zanferari">Cristiano Zanferari</option>
+                        <option value="Nathaly Julia Lopes">Nathaly Julia Lopes</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="agendamentoData">Data:</label>
+                    <input type="date" id="agendamentoData" required>
+                </div>
+                <div class="form-group">
+                    <label for="agendamentoHora">Hora:</label>
+                    <input type="time" id="agendamentoHora" required>
+                </div>
+                <div class="form-group">
+                    <label for="agendamentoValor">Valor (R$):</label>
+                    <input type="number" id="agendamentoValor" placeholder="150.00" step="0.01" required>
+                </div>
+            </div>
+            <button type="submit" class="full-width-button">Agendar Consulta</button>
+        </form>
+    </div>
+
+    <h2>Consultas Agendadas</h2>
+    <div class="tabela-container">
+        <table id="tabelaAgendamentos">
+            <thead>
+                <tr>
+        <th>Paciente</th>
+        <th>Data</th>
+        <th>Hora</th>
+        <th>Profissional</th>
+        <th>Valor</th>
+        <th>Ações</th> </tr>
+            </thead>
+            <tbody>
+                </tbody>
+        </table>
+    </div>
+</div>
+
+            <div id="profissionais-content" class="content-section">
+    <h1>Gestão de Profissionais</h1>
+
+    <div class="bloco-funcao">
+        <h3>Adicionar Novo Profissional</h3>
+        <form id="formAdicionarProfissional">
+            <div class="form-grid">
+                <div class="form-group">
+                    <label for="profissionalNome">Nome:</label>
+                    <input type="text" id="profissionalNome" placeholder="Nome Completo" required>
+                </div>
+                <div class="form-group">
+                    <label for="profissionalEspecialidade">Especialidade:</label>
+                    <input type="text" id="profissionalEspecialidade" placeholder="Ex: Fisioterapia Ortopédica" required>
+                </div>
+                <div class="form-group form-group-full">
+                    <label for="profissionalFotoUrl">URL da Foto (Opcional):</label>
+                    <input type="text" id="profissionalFotoUrl" placeholder="https://exemplo.com/foto.jpg">
+                </div>
+            </div>
+            <button type="submit" class="full-width-button">Adicionar Profissional</button>
+        </form>
+    </div>
+
+    <h2>Profissionais Cadastrados</h2>
+    <div id="profissionais-grid">
+        </div>
+</div>
+            
+            <div id="fluxo-caixa-content" class="content-section">
+    <h1>Fluxo de Caixa</h1>
+
+    <div class="summary-cards">
+        <div class="card card-entrada">
+            <h3>Total de Entradas</h3>
+            <p id="totalEntradas">R$ 0,00</p>
+        </div>
+        <div class="card card-saida">
+            <h3>Total de Saídas</h3>
+            <p id="totalSaidas">R$ 0,00</p>
+        </div>
+        <div class="card card-saldo">
+            <h3>Saldo Atual</h3>
+            <p id="saldoTotal">R$ 0,00</p>
+        </div>
+    </div>
+
+    <div class="bloco-funcao">
+        <h3>Adicionar Nova Transação</h3>
+        <form id="formTransacao">
+            <div class="form-grid">
+                <div class="form-group">
+                    <label for="transacaoDescricao">Descrição:</label>
+                    <input type="text" id="transacaoDescricao" placeholder="Ex: Pagamento consulta, Compra de material" required>
+                </div>
+                <div class="form-group">
+                    <label for="transacaoValor">Valor (R$):</label>
+                    <input type="number" id="transacaoValor" placeholder="150.00" step="0.01" required>
+                </div>
+                <div class="form-group">
+                    <label for="transacaoTipo">Tipo:</label>
+                    <select id="transacaoTipo" required>
+                        <option value="entrada">Entrada</option>
+                        <option value="saida">Saída</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="transacaoData">Data:</label>
+                    <input type="date" id="transacaoData" required>
+                </div>
+            </div>
+            <button type="submit" class="full-width-button">Adicionar Transação</button>
+        </form>
+    </div>
+
+    <h2>Histórico de Transações</h2>
+    <div class="tabela-container">
+        <table id="tabelaTransacoes">
+            <thead>
+                <tr>
+        <th>Data</th>
+        <th>Descrição</th>
+        <th>Valor</th>
+        <th>Tipo</th>
+        <th>Ações</th> </tr>
+            </thead>
+            <tbody>
+                </tbody>
+        </table>
+    </div>
+</div>
+
+    <script src="scripts.js"></script>
+</body>
+</html>
